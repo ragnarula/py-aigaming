@@ -8,8 +8,8 @@ def on_move(game_state, game_control):
 
 
 def main():
-    bot_id = "rag4"
-    bot_password = "123123"
+    bot_id = "xxx"
+    bot_password = "xxxxxx"
 
     game = tx.TexasHoldemClient(bot_id, bot_password, on_move)
     game.offer()

@@ -186,7 +186,7 @@ class TexasHoldemClient:
             self.poll()
 
         elif result == "NOT_YOUR_MOVE":
-            self.logger.error("Not your turn to make a move")
+            self.logger.debug("Not your turn to make a move")
             self.poll()
 
         elif result == 'INVALID_MOVE':
