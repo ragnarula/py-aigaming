@@ -81,7 +81,7 @@ class TexasHoldemClient:
         if self.cancelled:
             return
 
-        self.logger.debug("Offering")
+        self.logger.info("Offering Game")
         self.logger.debug(self.game_config)
 
         result = requests.post(self.offer_url,
@@ -121,7 +121,7 @@ class TexasHoldemClient:
             'PlayerKey': self.player_key
         })
 
-        self.logger.debug("Cancelling")
+        self.logger.info("Cancelling Game")
         self.logger.debug(data)
 
         result = requests.post(self.cancel_url,
@@ -144,7 +144,7 @@ class TexasHoldemClient:
             'Move': move_type
         })
 
-        self.logger.debug("Betting")
+        self.logger.info("Betting {}".format(bet_size))
         self.logger.debug(json.dumps(data))
 
         result = requests.post(self.move_url,
@@ -186,7 +186,7 @@ class TexasHoldemClient:
             self.poll()
 
         elif result == "NOT_YOUR_MOVE":
-            self.logger.debug("Not your turn to make a move")
+            self.logger.error("Not your turn to make a move")
             self.poll()
 
         elif result == 'INVALID_MOVE':
@@ -194,7 +194,7 @@ class TexasHoldemClient:
             self.play()
 
         else:
-            self.logger.debug("Unhandled response: {}".format(result))
+            self.logger.error("Unhandled response: {}".format(result))
             self.logger.debug(self.game_state)
 
     def on_cancel_response(self, result):
@@ -206,7 +206,7 @@ class TexasHoldemClient:
             self.play()
 
         else:
-            self.logger.debug("Unhandled cancel response: {}".format(result))
+            self.logger.error("Unhandled cancel response: {}".format(result))
             self.logger.debug(self.game_state)
 
     def play(self):
@@ -214,6 +214,7 @@ class TexasHoldemClient:
         if self.game_state['GameStatus'] == 'RUNNING':
 
             if self.game_state['IsMover']:
+                self.logger.info("Your Move...")
                 self.on_move(TexasHoldemGameState(self.game_state), self)
 
             else:
