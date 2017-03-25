@@ -8,7 +8,7 @@ To use this template:
 
 ## Explanation
 
-Line 30 constructs a ``TexasHoldemClient``` with your id and password for the bot and a callback function.
+Line 30 in ```example.py``` constructs a ```TexasHoldemClient``` with your id and password for the bot and a callback function.
 The callback gets called at every step with the new game_state and a reference to the client whenever it's your move.
 Use the contents of game_state to decide what to do. You can either call ```client.bet(bet_size)``` to bet or
 ```client.fold()``` to fold.
