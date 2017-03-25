@@ -19,7 +19,7 @@ def on_move(game_state, client):
     client.fold() or client.cancel(). To call, bet the same size as the game_state.OpponentRoundBetTotal or minBet.
     """
     min_bet = game_state.OpponentRoundBetTotal - game_state.PlayerRoundBetTotal
-    max_bet = min_bet + game_state.OpponentStack;
+    max_bet = min_bet + game_state.OpponentStack
     client.bet(min_bet)
 
 
